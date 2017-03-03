@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--为cn.dsg.pojo.User设置别名 User 方便调用,一般不建议使用
+	    <typeAliases>
+	        <typeAlias alias="User" type="cn.dsg.pojo.User"/>
+	    </typeAliases>
+	-->
+	<!-- 开启mybatis的二级缓存 -->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+</configuration>

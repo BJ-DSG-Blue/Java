@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd
+				http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+				http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+				http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd">	
+
+    <!-- mybatis配置文件路径 -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 开启MyBatis的二级缓存 -->
+        <property name="configLocation" value="classpath:sqlMapConfig.xml" />
+        <!-- 实体类映射文件路径,多个可以使用  /*.xml  来替代 -->  
+        <property name="mapperLocations">
+			<array>
+				<value>classpath:cn/dsg/dao/mapper/*.xml</value>
+			</array>
+		</property>
+    </bean>
+	<!--动态代理实现 不用写dao的实现 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 这里的basePackage 指定了dao层接口路径，这里的dao接口不用自己实现 -->  
+        <property name="basePackage" value="cn.dsg.dao" />
+        <!-- 如果只有一个数据源的话可以不用指定，但是如果有多个数据源的话必须要指定 -->  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+	
+</beans>
+
