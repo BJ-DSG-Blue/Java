@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService{
 			//session设置
 			HttpSession session=request.getSession();
 			session.setAttribute("userId",user.getUserId());
+			session.setAttribute("isLogin",true);
 			flag = true;
 		}
 		return flag;
@@ -37,5 +38,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void loginOutSystem(User user,HttpServletRequest request) {
 		request.getSession().removeAttribute("userId");
+		request.getSession().setAttribute("isLogin",false);
 	}
 }

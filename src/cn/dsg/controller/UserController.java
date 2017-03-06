@@ -76,7 +76,7 @@ public class UserController {
 	
 	//不带文件后缀根据视图配置跳转控制
 	@RequestMapping(value="/loginToIndex.do")
-	public ModelAndView trst(){
+	public ModelAndView loginToIndex(){
 		ModelAndView modelAndView = new ModelAndView();
 		// 相当于request 的 setAttribute, 在 jsp 页面中通过 itemList 取数据  
 //      modelAndView.addObject("itemsList", itemsList);

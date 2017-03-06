@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -40,8 +41,7 @@
 
 
 						<li class="con_r_right" style="display: block;">
-							<form name="loginForm" method="post"
-								action="login/loginCheck.do" autocomplete="off">
+							<form name="loginForm" method="post"  autocomplete="off">
 								<div class="user">
 									<div>
 										<span class="user-icon"></span> <input type="text" id="userid"
@@ -66,7 +66,7 @@
 
 								</div>
 								<br>
-								<button id="btn_Login" type="submit">登 录</button>
+								<button id="btn_Login" >登 录</button>
 							</form>
 						</li>
 					</ul>

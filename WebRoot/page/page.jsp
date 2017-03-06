@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String extPath = request.getContextPath();
+	String extBasePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+extPath;
 %>
 
 <%
@@ -11,6 +11,7 @@
 %>
 <script type="text/javascript">
 	//java变量->js变量
+	var extBasePath = "<%=extBasePath%>";
 	var param1 ="<%=param1%>";
 	var param2 ="<%=param2%>";
 	//有不传值和传值两处页面的跳转,要区别开
@@ -22,16 +23,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     <title>页面跳转</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="<%=extBasePath%>/js/jquery-3.1.1.min.js"></script>
   </head>
   
   <body>
     This is my change Page.jsp</br>
-    <a href="user/backToIndex.do">redirect跳回到首页</a>
+    <a href="<%=extBasePath%>/user/backToIndex.do">redirect跳回到首页</a>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="user/loginToIndex.do">根据ModelAndView跳回到首页</a>
+    <a href="<%=extBasePath%>/user/loginToIndex.do">根据ModelAndView跳回到首页</a>
   </body>
 </html>

@@ -10,7 +10,7 @@
   <head>
     <title>My JSP 'index.jsp' starting page</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="<%=extBasePath%>/js/jquery-3.1.1.min.js"></script>
   </head>
   <script type="text/javascript">
 	//java变量->js变量
@@ -28,7 +28,7 @@
 	  function testString(){
 			$.ajax({
 				type:"get",
-				url:"user/findUserName.do",
+				url:extBasePath+"/user/findUserName.do",
 				//contentType:"application/json;charset=utf-8",
 				data:'userId=1111',
 				success:function(data){
@@ -39,7 +39,7 @@
 	  function testPojo(){
 			$.ajax({
 				type:"post",
-				url:"user/findUser.do",
+				url:extBasePath+"/user/findUser.do",
 				contentType:"application/json;charset=utf-8",
 				data:'{"userId":"22222"}',
 				success:function(data){
@@ -50,7 +50,7 @@
 	  function testMap(){
 			$.ajax({
 				type:"get",
-				url:"user/findMap.do",
+				url:extBasePath+"/user/findMap.do",
 				contentType:"application/json;charset=utf-8",
 				data:'userId=1',
 				success:function(data){
@@ -61,11 +61,11 @@
 	  function loginOut(){
 			$.ajax({
 				type:"post",
-				url:extBasePath+"login/loginOut.do",
+				url:extBasePath+"/login/loginOut.do",
 				contentType:"application/json;charset=utf-8",
-				data:'{"userId":"1"}',
+				data:'{"userId":"'+userId+'"}',
 				success:function(){
-					debugger
+					alert("注销用户成功！");
 				}
 			});
 		}
@@ -76,8 +76,8 @@
     <button onclick="testString()" >后台接收String类型参数</button>
     <button onclick="testPojo()" >后台接收Object类型参数</button>
     <button onclick="testMap()" >查询数据库数据</button>
-	<a href="user/redirectPage.do">普通页面跳转</a>
-	<a href="user/redirectPageWithParams.do?qtParam=1">页面间跳转并且传值</a>
+	<a href="<%=extBasePath%>/user/redirectPage.do">普通页面跳转</a>
+	<a href="<%=extBasePath%>/user/redirectPageWithParams.do?qtParam=1">页面间跳转并且传值</a>
 	<button onclick="loginOut()" >退出系统</button>
   </body>
 </html>

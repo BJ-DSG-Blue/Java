@@ -20,23 +20,24 @@ $(function () {
             alert('请输入密码');
             return false;
         } else {
-        	loginCheck();
-        }
+	        $("#div_edit").hide();
+	    	$.ajax({
+				type:"post",
+				url:"login/loginCheck.do",
+				contentType:"application/json;charset=utf-8",
+				data:'{"userName":"'+$.trim($('#userid').val())+'","userPwd":"'+$.trim($('#pwd').val())+'"}',
+				success:function(data){
+					if(data){
+						window.location.href="user/loginToIndex.do";
+					}else{
+						alert("账号或密码错误！");
+					}
+				}
+			});
+			//如果是表单form的话  也会先执行form提交。
+			//提交之后 就已经不在当前页面了。所以 window.location.href无效，需要加上后面这句
+			window.event.returnValue=false;
+	    }
     });
-    
-    function loginCheck(id)  {
-        $("#div_edit").hide();
-    	//ajax提交表单url,data,callback,returnType
-		$.post("login/loginCheck.do", {
-			userName : $.trim($('#userid').val()),
-			userPwd : $.trim($('#pwd').val()) 
-		}, function(data) {
-			if(data){
-				window.location.href="user/loginToIndex.do";
-				return;
-			}
-			window.location.href="login/backToLogin.do";
-		}, "json");// 这里返回的类型有：json,html,xml,text
-    }
 
 })

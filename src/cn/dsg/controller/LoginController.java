@@ -5,8 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.portlet.ModelAndView;
+
 import cn.dsg.pojo.User;
 import cn.dsg.service.UserService;
 
@@ -18,19 +19,26 @@ public class LoginController {
 	private UserService service;
 	
 	@ResponseBody
-	@RequestMapping(value="/loginCheck.do",method=RequestMethod.POST)
-	public String loginCheck(String userName,String userPwd,HttpServletRequest request){
-		return this.service.loginCheck(userName, userPwd,request)+"";
+	@RequestMapping(value="/loginCheck.do")
+	public boolean loginCheck(@RequestBody User user,HttpServletRequest request){
+		String userName = user.getUserName();
+		String userPwd =  user.getUserPwd();
+		System.out.println(userName+","+userPwd);
+		return this.service.loginCheck(userName, userPwd,request);
 	}
 	//回到首页
 	@RequestMapping(value="/backToLogin.do")
 	public String backToLogin(){
-		return "redirect:/login.html";
+		return "redirect:/login.jsp";
 	}
 	//注销用户
 	@RequestMapping(value="/loginOut.do")
-	public void loginOut(@RequestBody User user,HttpServletRequest request){
+	public ModelAndView loginOut(@RequestBody User user,HttpServletRequest request){
+		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(user.toString());
 		this.service.loginOutSystem(user, request);
+		modelAndView.setViewName("/login");
+		return modelAndView;
+		
 	}
 }
